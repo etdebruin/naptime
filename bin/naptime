@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'naptime'
+n = Naptime::REST.new(ARGV[0])
+n.output
