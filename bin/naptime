@@ -1,5 +1,24 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 require 'naptime'
-n = Naptime::REST.new(ARGV[0])
-n.output
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: naptime [options]"
+
+  opts.on("-f", "--file FILENAME", "Read from FILENAME") do |file|
+    options[:file] = file
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+end.parse!
+
+if options[:file]
+  n = Naptime::REST.new(options[:file])
+  n.output
+end
